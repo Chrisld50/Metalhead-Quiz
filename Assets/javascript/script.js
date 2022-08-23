@@ -1,14 +1,14 @@
-var startButton = document.querySelector("#start-button");
-var quizQuestion = document.querySelector("#quiz-question");
-var choiceA = document.querySelector("#choice-A");
-var choiceB = document.querySelector("#choice-B");
-var choiceC = document.querySelector("#choice-C");
-var choiceD = document.querySelector("#choice-D");
-var checkAnswer = document.querySelector("#check-answer");
-var timeLeft = document.querySelector("#time-left"); 
-var highScore = document.querySelector("#highscore-screen");
-var timeUp = document.querySelector("#times-up");
-var inititals = document.querySelector("#intital-submit");
+var startButton = document.querySelector(".start-button");
+var quizQuestion = document.querySelector(".quiz-question");
+var choiceA = document.querySelector(".choice-A");
+var choiceB = document.querySelector(".choice-B");
+var choiceC = document.querySelector(".choice-C");
+var choiceD = document.querySelector(".choice-D");
+var checkAnswer = document.querySelector(".check-answer");
+var timeLeft = document.querySelector(".time-left"); 
+var highScore = document.querySelector(".highscore-screen");
+var timeUp = document.querySelector(".times-up");
+var inititals = document.querySelector(".intital-submit");
 
 var correct =  0;
 var questionIndex = 0;
@@ -46,20 +46,20 @@ var questions = [
 
 function startQuiz() {
     questionIndex = 0;
-    totalTime = 100;
-    timeLeft.textContent = totalTime;
-    inititals.textContent = "";
+    // //totalTime = 100;
+    // timeLeft.textContent = totalTime;
+    // inititals.textContent = "";
 
-    var timeStart = setInterval(function() {
-        totalTime--;
-        timeLeft.textContent = totalTime;
-        if (totalTime <= 0){
-            clearInterval(timeStart);
-            if (questionIndex < questions.length -1) {
-                gameOver();
-            }
-        }
-    },1000);
+    // var timeStart = setInterval(function() {
+    //     totalTime--;
+    //     timeLeft.textContent = totalTime;
+    //     if (totalTime <= 0){
+    //         clearInterval(timeStart);
+    //         if (questionIndex < questions.length -1) {
+    //             gameOver();
+    //         }
+    //     }
+    // },1000);
 
     showQuiz();
 };
@@ -95,10 +95,10 @@ function answerCheck(answer) {
     }
 };
 
-function pickA() { checkAnswer(0) };
-function pickB() { checkAnswer(1) };
-function pickC() { checkAnswer(2) };
-function pickD() { checkAnswer(3) };
+function pickA() { answerCheck(0) };
+function pickB() { answerCheck(1) };
+function pickC() { answerCheck(2) };
+function pickD() { answerCheck(3) };
 
 function gameOver() {
     highScore.textContent = correct;
