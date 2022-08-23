@@ -10,10 +10,9 @@ var highScore = document.querySelector(".highscore-screen");
 var timeUp = document.querySelector(".times-up");
 var inititals = document.querySelector(".intital-submit");
 
-var correct =  0;
 var questionIndex = 0;
 var totalTime = 101;
-
+var correctAnswer = 0;
 
 var questions = [
     {
@@ -69,30 +68,34 @@ function showQuiz() {
 };
 
 function nextQuestion() {
-    quizQuestion.textContent = questions[questionIndex].question;
-    choiceA.textContent = questions[questionIndex].choices[0];
-    choiceB.textContent = questions[questionIndex].choices[1];
-    choiceC.textContent = questions[questionIndex].choices[2];
-    choiceD.textContent = questions[questionIndex].choices[3];
-};
-
-function answerCheck(answer) {
-    if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
-        correctAnswer++;
-        checkAnswer.textContent = "You got it!";
-    } else {
-        totalTime -= 20;
-        timeLeft.textContent = totalTime;
-        checkAnswer.textContent = "That ain't it! A Metalhead would know the answer is: " + questions[questionIndex].answer;
-    }
-
-    questionIndex++;
-
     if (questionIndex < questions.length) {
-        nextQuestion();
+        quizQuestion.textContent = questions[questionIndex].question;
+        choiceA.textContent = questions[questionIndex].choices[0];
+        choiceB.textContent = questions[questionIndex].choices[1];
+        choiceC.textContent = questions[questionIndex].choices[2];
+        choiceD.textContent = questions[questionIndex].choices[3];  
     } else {
         gameOver();
     }
+
+};
+
+function answerCheck(answer) {
+    if (answer === questions[questionIndex].correct) {
+        correctAnswer++;
+        checkAnswer.textContent = "You got it!";
+    } 
+    // else {
+    //     totalTime -= 20;
+    //     timeLeft.textContent = totalTime;
+    //     checkAnswer.textContent = "That ain't it! A Metalhead would know the answer is: " + questions[questionIndex].answer;
+    // }
+    console.log(correctAnswer)
+
+    questionIndex++;
+    nextQuestion();
+
+    
 };
 
 function pickA() { answerCheck(0) };
@@ -101,7 +104,7 @@ function pickC() { answerCheck(2) };
 function pickD() { answerCheck(3) };
 
 function gameOver() {
-    highScore.textContent = correct;
+    highScore.textContent = correctAnswer;
 };
 
 startButton.addEventListener("click", startQuiz);
