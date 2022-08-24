@@ -9,62 +9,65 @@ var timeLeft = document.querySelector(".time-left");
 var highScore = document.querySelector(".highscore-screen");
 var timeUp = document.querySelector(".times-up");
 var inititals = document.querySelector(".intital-submit");
+var questionOptions = document.querySelector(".question-options");
+var start = document.querySelector(".start")
 
 var questionIndex = 0;
-var totalTime = 101;
+var totalTime = 100;
 var correctAnswer = 0;
+var secondsLeft;
 
 var questions = [
     {
     quizQuestion: "Who is known for creating the metal horns?",
     choices: ["A. Ronnie James Dio", "B. Ozzy Osbourne", "C. James Hetfield", "D. Rob Halford"],
-    correct: 0  
+    correct: "A"  
     },
     {
     quizQuestion: "Who are known as the Big 4 of thrash?",
     choices: ["A. Slipknot, Korn, System of a Down, Mudvayne", "B. Gojira, Lamb of God, Pantera, Masodon","C. Metallica, Anthrax, Slayer, Megadeth", "D. Death, Testament, Iron Maiden, Kreator"],
-    correct: 2    
+    correct: "C"    
     },
     {
     quizQuestion: "What is the name of the Iron Maiden mascot that is seen frequently on their album covers?",
     choices: ["A. The Maiden", "B. Eddie the Head","C. The Guy","D. Facebones"],
-    correct: 1    
+    correct: "B"    
     },
     {
     quizQuestion: "What band named their fanbase maggots?",
     choices: ["A. Slipknot", "B. Korn","C. Lamb of God","D. Mudvayne"],
-    correct: 0    
+    correct: "A"   
     },    
     {
     quizQuestion: "Believe it or not, the first band to ever play on all 7 continents was a metal band. Which band was it?",
     choices: ["A. Motorhead", "B. Black Sabbath","C. Kiss","D. Metallica"],
-    correct: 3    
+    correct: "D"   
     },    
 ];
 
 
 function startQuiz() {
     questionIndex = 0;
-    // //totalTime = 100;
-    // timeLeft.textContent = totalTime;
-    // inititals.textContent = "";
+     secondsLeft = totalTime;
 
-    // var timeStart = setInterval(function() {
-    //     totalTime--;
-    //     timeLeft.textContent = totalTime;
-    //     if (totalTime <= 0){
-    //         clearInterval(timeStart);
-    //         if (questionIndex < questions.length -1) {
-    //             gameOver();
-    //         }
-    //     }
-    // },1000);
+     questionOptions.style.display = "block";
+     
+   
+
+     var timeStart = setInterval(function() {
+         secondsLeft--;
+         timeLeft.textContent ="Time: " + secondsLeft;
+         if (secondsLeft < 1){
+             clearInterval(timeStart);
+             gameOver();
+         }
+     },1000);
 
     showQuiz();
 };
 
 function showQuiz() {
-    nextQuestion();
+nextQuestion (Math.floor(Math.random() * 5));
 };
 
 function nextQuestion() {
@@ -85,11 +88,11 @@ function answerCheck(answer) {
         correctAnswer++;
         checkAnswer.textContent = "You got it!";
     } 
-    // else {
-    //     totalTime -= 20;
-    //     timeLeft.textContent = totalTime;
-    //     checkAnswer.textContent = "That ain't it! A Metalhead would know the answer is: " + questions[questionIndex].answer;
-    // }
+     else {
+         secondsLeft -= 15;
+         timeLeft.textContent ="Time: " + secondsLeft;
+         checkAnswer.textContent = "That ain't it! A Metalhead would know the answer is: " + questions[questionIndex].correct;
+     }
     console.log(correctAnswer)
 
     questionIndex++;
@@ -98,13 +101,15 @@ function answerCheck(answer) {
     
 };
 
-function pickA() { answerCheck(0) };
-function pickB() { answerCheck(1) };
-function pickC() { answerCheck(2) };
-function pickD() { answerCheck(3) };
+
+function pickA() { answerCheck("A") };
+function pickB() { answerCheck("B") };
+function pickC() { answerCheck("C") };
+function pickD() { answerCheck("D") };
 
 function gameOver() {
-    highScore.textContent = correctAnswer;
+    timeLeft.textContent = "Time: " + totalTime;
+    highScore.textContent = "Final Score: " + correctAnswer;
 };
 
 startButton.addEventListener("click", startQuiz);

@@ -1,0 +1,18 @@
+.question-options{
+    display: none;
+}
+
+.times-up{
+    display: none;
+    
+}
+
+.finished {
+display: none;
+}
+
+.start{
+    display: block;
+
+}
+
