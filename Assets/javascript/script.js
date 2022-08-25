@@ -11,12 +11,14 @@ var inititals = document.querySelector(".intital-submit");
 var questionOptions = document.querySelector(".question-options");
 var start = document.querySelector(".start");
 var title = document.querySelector("#question");
-var top = document.querySelector(".top");
-
+var top = document.getElementById("top");
+var finished = document.querySelector(".finished");
 var questionIndex = 0;
 var totalTime = 100;
 var correctAnswer = 0;
 var secondsLeft;
+
+
 
 var questions = [
     {
@@ -57,6 +59,8 @@ var timeStart = setInterval(function() {
 function startQuiz() {
     questionIndex = 0;
      secondsLeft = totalTime;
+     
+     console.log(top.children)
 
 
 
