@@ -13,7 +13,6 @@
     <div class="top">
       <button class="Highscore">View Highscores</button>
       <p class="time-left"></p>
-      <div class="times-up"> Times up! </div>
     </div>
 
     <header class="Start">
@@ -29,7 +28,7 @@
 
       <section class="question-options">
         <div class="quiz-question"></div>
-        <h2> Question </h2>
+        <h2> Question: <span id="question"></span> </h2>
         <ul>
           <li><button class="choice-A">A</button></li>
           <li><button class="choice-B">B</button></li>
@@ -42,14 +41,15 @@
       <section class="finished"> 
         <h2>Quiz Completed</h2>
         <div class="highscore-screen"></div>
+        <div id="time-final"></div>
         <div>
           <label for="">Enter Initials:</label>
           <input type="text">
-          <button class="initials-submit">Submit</button>
+          <button class="initials-submit">Submit</button>         
+          <button onclick="location.reload();"> Reset Quiz</button>
         </div>
       </section>
       
-      <div class="highscore-screen"></div>
 
 
 

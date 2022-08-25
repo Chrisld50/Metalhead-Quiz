@@ -7,10 +7,11 @@ var choiceD = document.querySelector(".choice-D");
 var checkAnswer = document.querySelector(".check-answer");
 var timeLeft = document.querySelector(".time-left"); 
 var highScore = document.querySelector(".highscore-screen");
-var timeUp = document.querySelector(".times-up");
 var inititals = document.querySelector(".intital-submit");
 var questionOptions = document.querySelector(".question-options");
-var start = document.querySelector(".start")
+var start = document.querySelector(".start");
+var title = document.querySelector("#question");
+var top = document.querySelector(".top");
 
 var questionIndex = 0;
 var totalTime = 100;
@@ -45,39 +46,41 @@ var questions = [
     },    
 ];
 
+var timeStart = setInterval(function() {
+    secondsLeft--;
+    timeLeft.textContent ="Time: " + secondsLeft;
+    if (secondsLeft < 1){
+        clearInterval(timeStart);
+    }
+},1000);
 
 function startQuiz() {
     questionIndex = 0;
      secondsLeft = totalTime;
 
-     questionOptions.style.display = "block";
-     
-   
 
-     var timeStart = setInterval(function() {
-         secondsLeft--;
-         timeLeft.textContent ="Time: " + secondsLeft;
-         if (secondsLeft < 1){
-             clearInterval(timeStart);
-             gameOver();
-         }
-     },1000);
+
+
+     
+
 
     showQuiz();
 };
 
 function showQuiz() {
-nextQuestion (Math.floor(Math.random() * 5));
+nextQuestion ();
 };
 
 function nextQuestion() {
     if (questionIndex < questions.length) {
         quizQuestion.textContent = questions[questionIndex].question;
+        title.textContent = questions[questionIndex].quizQuestion;
         choiceA.textContent = questions[questionIndex].choices[0];
         choiceB.textContent = questions[questionIndex].choices[1];
         choiceC.textContent = questions[questionIndex].choices[2];
         choiceD.textContent = questions[questionIndex].choices[3];  
     } else {
+        clearInterval(timeStart); 
         gameOver();
     }
 
@@ -108,9 +111,11 @@ function pickC() { answerCheck("C") };
 function pickD() { answerCheck("D") };
 
 function gameOver() {
-    timeLeft.textContent = "Time: " + totalTime;
+    var timeFinal = document.querySelector("#time-final");
+    timeFinal.textContent = "Time: " + secondsLeft;
     highScore.textContent = "Final Score: " + correctAnswer;
 };
+
 
 startButton.addEventListener("click", startQuiz);
 choiceA.addEventListener("click", pickA);
