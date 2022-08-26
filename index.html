@@ -10,12 +10,13 @@
 
   <body>
 
+      <!--Here is the main body of the Quiz, with the header and beginning p element along with the start quiz button to begin the quiz.-->
     <div id="top">
       <button class="Highscore">View Highscores</button>
       <p class="time-left"></p>
     </div>
 
-    <header class="Start">
+    <header class="start">
       <h1>Metalhead Quiz</h1>
       <p> Do you think you are a metalhead? Test yourself with this quiz! 
         only the most dedicated metal fans will be able to do this quiz well.
@@ -25,6 +26,8 @@
     </header>
 
     <main> 
+
+      <!-- Here are where the question buttons are located.-->
 
       <section class="question-options">
         <div class="quiz-question"></div>
@@ -38,15 +41,20 @@
         <div class="check-answer"></div>
       </section>
 
+      <!--The finished section is where the final score is and enter initials starts..-->
+
       <section class="finished"> 
         <h2>Quiz Completed</h2>
-        <div class="highscore-screen"></div>
-        <div id="time-final"></div>
-        <div>
-          <label for="">Enter Initials:</label>
+          <div id="time-final"></div>
           <input type="text">
-          <button class="initials-submit">Submit</button>         
+          <div class="highscore-screen"></div>
+          <label for="" >Enter Initials</label>
+          <div>
+          <button id="initials-submit">Submit</label></button>         
           <button onclick="location.reload();"> Restart Quiz</button>
+
+                <!--Above i used onclick to have the location reload which restarts the quiz from the beginning.-->
+
         </div>
       </section>
       

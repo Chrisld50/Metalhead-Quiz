@@ -1,3 +1,45 @@
+:root{
+--font-color: rgb(109, 13, 13);
+
+}
+
+html{
+    background-image: linear-gradient(to right, gray,rgb(85, 77, 77));
+    font-family: Luminari;
+    color: var(--font-color);
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+
+button{
+    font-family: Luminari;
+    color: var(--font-color);
+    background-color: gray;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 6px;
+      
+}
+
+
+ul {
+list-style-type: none;
+}
+
+button:hover{
+    background-color: white;
+    color: black;
+}
+
+.finished{
+    margin: 10px;
+    padding: 10px;
+}
+
+/* here is how I made the areas of my HTML change by calling these into my javascript */
+
 .hide {
     display: none;
 
@@ -6,4 +48,8 @@
 .show {
     display: block;
     
+}
+
+.hidden {
+    display: none;
 }

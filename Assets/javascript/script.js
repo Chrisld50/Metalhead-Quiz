@@ -7,18 +7,28 @@ var choiceD = document.querySelector(".choice-D");
 var checkAnswer = document.querySelector(".check-answer");
 var timeLeft = document.querySelector(".time-left"); 
 var highScore = document.querySelector(".highscore-screen");
-var inititals = document.querySelector(".intital-submit");
+var initialsEl = document.querySelector("#initials-submit");
 var questionOptions = document.querySelector(".question-options");
-var start = document.querySelector(".start");
+var startEl = document.querySelector(".start");
 var title = document.querySelector("#question");
-var top = document.getElementById("top");
-var finished = document.querySelector(".finished");
+var topEl = document.getElementById("top");
+var finishedEl = document.querySelector(".finished");
+var scoreFinal = document.querySelector("#time-final");
 var questionIndex = 0;
 var totalTime = 100;
 var correctAnswer = 0;
 var secondsLeft;
 
+//Above are the global variables that get called throughout the javascript as well as where i utilize querySelector and getElementbyId to pull the elements from my HTML//
 
+topEl.classList.add("hide");
+questionOptions.classList.add("hide");
+finishedEl.classList.add("hide");
+
+//Above is where I hide parts of my HTML so that only sections are shown so the entire quiz could fit on 1 html.//
+
+
+// Below is the variable for my questions that will be pulled to the ul on my HTML when the quiz starts//
 
 var questions = [
     {
@@ -48,6 +58,8 @@ var questions = [
     },    
 ];
 
+// Below is the timer and how it starts.//
+
 var timeStart = setInterval(function() {
     secondsLeft--;
     timeLeft.textContent ="Time: " + secondsLeft;
@@ -58,15 +70,13 @@ var timeStart = setInterval(function() {
 
 function startQuiz() {
     questionIndex = 0;
-     secondsLeft = totalTime;
-     
-     console.log(top.children)
+    secondsLeft = totalTime;
 
+topEl.classList.add("show");
+questionOptions.classList.add("show");
+startEl.classList.add("hide");
 
-
-
-     
-
+// Above is where i continue to use classList to alter my HTML so that the questions and timer are the only ones that are showing.//
 
     showQuiz();
 };
@@ -74,6 +84,8 @@ function startQuiz() {
 function showQuiz() {
 nextQuestion ();
 };
+
+//This function is what leads to the next question.//
 
 function nextQuestion() {
     if (questionIndex < questions.length) {
@@ -90,6 +102,8 @@ function nextQuestion() {
 
 };
 
+// Here is where my answerCheck is where if you get a question right you get a message showing so and if you get one wrong a message will show for that as well.//
+
 function answerCheck(answer) {
     if (answer === questions[questionIndex].correct) {
         correctAnswer++;
@@ -100,7 +114,7 @@ function answerCheck(answer) {
          timeLeft.textContent ="Time: " + secondsLeft;
          checkAnswer.textContent = "That ain't it! A Metalhead would know the answer is: " + questions[questionIndex].correct;
      }
-    console.log(correctAnswer)
+  
 
     questionIndex++;
     nextQuestion();
@@ -114,15 +128,36 @@ function pickB() { answerCheck("B") };
 function pickC() { answerCheck("C") };
 function pickD() { answerCheck("D") };
 
+// Here is where my gameOver function is where when the game ends it will show your score and shows the last codes for the classList to only show the gameOver screen.
+
 function gameOver() {
+    topEl.classList.add("hidden");
+    questionOptions.classList.add("hidden");
     var timeFinal = document.querySelector("#time-final");
-    timeFinal.textContent = "Time: " + secondsLeft;
-    highScore.textContent = "Final Score: " + correctAnswer;
+    timeFinal.textContent = "Final Score: " + secondsLeft;
+    finishedEl.classList.add("show");
+
+
 };
 
+
+// Here are my addEventListeners to make my buttons function with the rest of the program.//
 
 startButton.addEventListener("click", startQuiz);
 choiceA.addEventListener("click", pickA);
 choiceB.addEventListener("click", pickB);
 choiceC.addEventListener("click", pickC);
 choiceD.addEventListener("click", pickD);
+initialsEl.addEventListener("click", function(event){
+event.preventDefault();
+
+// This was my attempt at creating the highscores in localStorage. Sadly, I was unsuccessful and ran out of time to finish this.//
+
+var user = {
+    ScoreEl: scoreFinal.value,
+    initEl: highScore.value
+}
+
+localStorage.setItem("user", JSON.stringify(user));
+
+});
